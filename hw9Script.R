@@ -8,7 +8,7 @@ library(tidyverse)
 ###################
 #Continuous data
 dat = read_csv("agacis.csv") |>
-  dplyr::select(-Annual) |> #What does dplyr
+  dplyr::select(-Annual) |> #What does dplyr do as opposed to the regular function?
   pivot_longer(cols = c("Jan", "Feb", "Mar",
                "Apr", "May", "Jun",
                "Jul", "Aug", "Sep",
@@ -67,8 +67,9 @@ weibull.lik = -2166.496
 #Gamma and Log Normal
 (likelihood.ratio3 = exp(gamma.lik - lnorm.lik))
 
-
+################################################################################
 #Coding challenge: Need to finish: Recall how to superimpose several lines
+################################################################################
 #Winter
 winter.dat = dat |>
   filter(Month %in% c("Dec","Jan", "Feb")) |>
@@ -107,7 +108,6 @@ summ.dist = dgamma(x = summer.dat$Precipitation, shape = alpha.summ, rate = beta
 #Fall
 fall.dat = dat |>
   filter(Month %in% c("Sep","Oct", "Nov"))
-
 vals.fall = optim(fn = mle.gamma, 
                   data = dat$Precipitation, 
                   par = c(1,1),
